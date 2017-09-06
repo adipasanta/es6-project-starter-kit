@@ -46,12 +46,16 @@
     "sinon-chai": "^2.10.0",
     "uglify-js": "^3.0.10",
     "mocha": "^3.4.2",
-    "phantomjs-prebuilt": "^2.1.14"
+    "phantomjs-prebuilt": "^2.1.14",
+    "d3": "^4.10.2"
   },
   "author": "Gianluca Guarini (http://gianlucaguarini.com/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/GianlucaGuarini/es6-project-starter-kit/issues"
   },
-  "homepage": "https://github.com/GianlucaGuarini/es6-project-starter-kit"
+  "homepage": "https://github.com/GianlucaGuarini/es6-project-starter-kit",
+  "dependencies": {
+    "file-saver": "^1.3.3"
+  }
 }
