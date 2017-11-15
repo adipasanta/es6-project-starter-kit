@@ -1,7 +1,9 @@
-import helpers from './helpers/helpers'
+import { select, selectAll, event } from "d3-selection";
+import { format } from "d3-format";
+import { min, max, extent, sum } from "d3-array";
 
 /**
- * An awesome script
+ * An awesome script - edit
  */
 export default class {
   constructor(name = 'Dear Coder', text = 'hi there') {

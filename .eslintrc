@@ -86,7 +86,8 @@ rules:
   default-case: 2           # require default case in switch statements
   dot-notation: 1           # encourages use of dot notation whenever possible
   eqeqeq: 0                 # require the use of === and !==
-  guard-for-in: 1           # make sure for-in loops have an if statement
+  #guard-for-in: 1           # make sure for-in loops have an if statement
+  guard-for-in: 0           # make sure for-in loops have an if statement
   no-alert: 0               # disallow the use of alert, confirm, and prompt
   no-caller: 2              # disallow use of arguments.caller or arguments.callee
   no-div-regex: 0           # disallow division operators explicitly at beginning of regular
@@ -179,7 +180,8 @@ rules:
   #                                                                         #
   ###########################################################################
 
-  indent: [2, 2]                 # Set a specific tab width
+  #indent: [2, 2]                 # Set a specific tab width
+  indent: 0                      # Set a specific tab width
   brace-style: 0                 # enforce one true brace style
   camelcase: 0                   # require camel case names
   comma-spacing: 2               # enforce spacing before and after comma
@@ -198,23 +200,28 @@ rules:
   no-nested-ternary: 0           # disallow nested ternary expressions
   no-new-object: 1               # disallow use of the Object constructor
   no-space-before-semi: 0        # disallow space before semicolon
-  no-spaced-func: 2              # disallow space between function identifier and application
+  #no-spaced-func: 2              # disallow space between function identifier and application
+  no-spaced-func: 0              # disallow space between function identifier and application
   no-ternary: 0                  # disallow the use of ternary operators
 
   no-trailing-spaces: 2          # disallow trailing whitespace at the end of lines
   no-multiple-empty-lines: 0     # disallow multiple empty lines
   no-underscore-dangle: 0        # disallow dangling underscores in identifiers
-  no-extra-parens: 2                # disallow wrapping of non-IIFE statements in parens
+  #no-extra-parens: 2                # disallow wrapping of non-IIFE statements in parens
+  no-extra-parens: 0                # disallow wrapping of non-IIFE statements in parens
   one-var: 0                     # allow just one var statement per function
   padded-blocks: 0               # enforce padding within blocks
-  quotes:                        # specify whether double or single quotes should be used
-    [1, "single", "avoid-escape"]
+  #quotes:                        # specify whether double or single quotes should be used
+  #  [1, "single", "avoid-escape"]
+  quotes: 0
   quote-props: 0                 # require quotes around object literal property names
   semi: [2, "never"]             # require or disallow use of semicolons instead of ASI
   semi-spacing: 0
   sort-vars: 0                   # sort variables within the same declaration block
-  keyword-spacing: 2             # require a space after certain keywords
-  space-before-blocks: 2         # require or disallow space before blocks
+  #keyword-spacing: 2             # require a space after certain keywords
+  keyword-spacing: 0             # require a space after certain keywords
+  #space-before-blocks: 2         # require or disallow space before blocks
+  space-before-blocks: 0         # require or disallow space before blocks
   space-in-brackets: 0           # require or disallow spaces inside brackets
   space-in-parens: 0             # require or disallow spaces inside parentheses
   space-infix-ops: 0             # require spaces around operators

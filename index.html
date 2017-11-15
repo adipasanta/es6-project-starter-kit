@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="/css/themes/modified/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<link href="/console/css/ifta_d3js.css" rel="stylesheet" type="text/css" />
+	<style>
+		/* hide while print */
+		.print-hide {
+			display: none;
+		}
+		div.tooltip {
+			position: absolute;
+			text-align: center;
+			width: auto;
+			height: auto;
+			padding: 2px;
+			font: 12px sans-serif;
+			background: lightsteelblue;
+			border: 0px;
+			border-radius: 8px;
+			pointer-events: none;
+		}
+		#nav {
+			float: left;
+			width: 200px;
+			list-style: none;
+			display:block;
+			margin:0;
+			padding:0;
+			border-top: 1px solid #16A085;
+			border-right: 1px solid #16A085;
+			border-left: 1px solid #16A085;
+		}
+		#nav li {
+			margin:0;
+			padding:0;
+		}
+		#nav li a {
+			display: block;
+			padding: 10px 15px;
+			background: #16A085;
+			border-top: 1px solid #eee;
+			border-bottom: 1px solid #CCCCCC;
+			text-decoration: none;
+			color: #fff;
+		}
+		#nav li a:hover, #nav li a.active {
+			background: #CCCCCC;
+			color: #fff;
+		}
+		#nav li ul{
+			display:none;
+			margin:0;
+			padding:0;
+		}
+		#nav li ul li {
+			list-style: none;
+		}
+		#nav li ul li a {
+			list-style: none;
+			padding: 10px 25px;
+			background: #6DBC4B;
+			border-bottom: 1px dotted #ccc;
+		}
+		#nav li ul li a:hover, #nav li ul li a.active {
+			background: #04B750;
+			color: #fff;
+		}
+		#nav2 {
+			float: left;
+			width: 200px;
+			list-style: none;
+			display:block;
+			margin:0;
+			padding:0;
+			border-top: 1px solid #16A085;
+			border-right: 1px solid #16A085;
+			border-left: 1px solid #16A085;
+		}
+		#nav2 li {
+			margin:0;
+			padding:0;
+		}
+		#nav2 li a {
+			display: block;
+			padding: 10px 15px;
+			background: #16A085;
+			border-top: 1px solid #eee;
+			border-bottom: 1px solid #CCCCCC;
+			text-decoration: none;
+			color: #fff;
+		}
+		#nav2 li a:hover, #nav2 li a.active {
+			background: #CCCCCC;
+			color: #fff;
+		}
+		#nav2 li ul{
+			display:none;
+			margin:0;
+			padding:0;
+		}
+		#nav2 li ul li {
+			list-style: none;
+		}
+		#nav2 li ul li a {
+			list-style: none;
+			padding: 10px 25px;
+			background: #6DBC4B;
+			border-bottom: 1px dotted #ccc;
+		}
+		#nav2 li ul li a:hover, #nav2 li ul li a.active {
+			background: #04B750;
+			color: #fff;
+		}
+		#map-canvas { height: 600px; }
+		
+		.stations, .stations svg {
+		  position: absolute;
+		}
+		.stations svg {
+		  width: 60px;
+		  height: 20px;
+		  padding-right: 100px;
+		  font: 10px sans-serif;
+		}
+		.stations circle {
+		  fill: brown;
+		  stroke: black;
+		  stroke-width: 1.5px;
+		}
+	</style>
+</head>
+<body class="listing">
+	<div id="wrapdoc">
+		<table id="page" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td id="td-content">
+					<div id="wrapcontent">
+						<div class="pri">
+							<div id="contenttitle">
+								<div class="title"><h2>D3 Chart Example</h2></div>
+							</div> <!-- end #contenttitle -->
+							<div id="listing">
+								<br />
+								<table class="bodyText" style="width:100%;" cellpadding="5" cellspacing="0">
+									<tr>
+										<td>
+											<table class="bodyText" style="width: 100%;" cellpadding="5" cellspacing="0">
+												<tr>
+													<td style="text-align:left;vertical-align:top;width:83%;border:solid 1px #DFDFDF;height:200px;background-color:#F5F5F5;">
+														<table class="bodyText" style="width: 100%;" cellpadding="5" cellspacing="0">
+															<tr>
+																<td style="vertical-align:top;">
+																	<table class="bodyText" style="width: 100%;" cellpadding="0" cellspacing="0">
+																		<tr>
+																			<td style="text-align:center;vertical-align:top;width:70%;">
+																				<table class="bodyText" style="width: 100%;" cellpadding="0" cellspacing="0">
+																					<tr>
+																						<th colspan="4" style="text-align:center;vertical-align:top;height:50px;padding-top:20px;">TEST BATTERY OVERVIEW</th>
+																					</tr>
+																					<tr>
+																						<td style="text-align:center;vertical-align:bottom;">
+																							<table class="bodyText" style="width: 100%;" cellpadding="0" cellspacing="0">
+																								<tr>
+																									<th style="text-align:center;border-right:solid 2px #000000;">Total<br/>Examinees</th>
+																								</tr>
+																								<tr>
+																									<th style="text-align:center;border-right:solid 2px #000000;"><div id="dvTotalExaminee"><h1 v-text="iTotalExaminees"></h1></div></th>
+																								</tr>
+																							</table>
+																						</td>
+																						<td style="text-align:center;vertical-align:bottom;">
+																							<table class="bodyText" style="width: 100%;" cellpadding="0" cellspacing="0">
+																								<tr>
+																									<th style="vertical-align:middle;text-align:center;border-right:solid 1px #DFDFDF;color:#626262;">
+																										<table class="bodyText" style="width: 100%;" cellpadding="0" cellspacing="0">
+																											<tr>
+																												<td style="text-align:right;vertical-align:top;padding-bottom:5px;">
+																													<div id="d3LegendBottom1"></div>
+																												</td>
+																												<td style="text-align:left;vertical-align:bottom;padding-left:10px;">
+																													Examinees<br/>Completed
+																												</td>
+																											</tr>
+																										</table>
+
+																									</th>
+																								</tr>
+																								<tr>
+																									<th style="text-align:center;border-right:solid 1px #DFDFDF;">
+																										<h1><div id="dvTotalExamineesCompleted">
+																											<input type="text" name="iTotalExamineesCompleted" v-model="iTotalExamineesCompleted">
+																										</div></h1>
+																									</th>
+																								</tr>
+																							</table>
+																						</td>
+																						<td style="text-align:center;vertical-align:bottom;">
+																							<table class="bodyText" style="width: 100%;" cellpadding="0" cellspacing="0">
+																								<tr>
+																									<th style="text-align:center;border-right:solid 1px #DFDFDF;color:#626262;">
+																										<table class="bodyText" style="width: 100%;" cellpadding="0" cellspacing="0">
+																											<tr>
+																												<td style="text-align:right;vertical-align:top;padding-bottom:5px;">
+																													<div id="d3LegendBottom2"></div>
+																												</td>
+																												<td style="text-align:left;vertical-align:bottom;padding-left:10px;">
+																													Examinees<br/>Not Started
+																												</td>
+																											</tr>
+																										</table>
+																									</th>
+																								</tr>
+																								<tr>
+																									<th style="text-align:center;border-right:solid 1px #DFDFDF;">
+																										<h1><div id="dvTotalExamineesNotStarted">
+																											<input type="text" name="iTotalExamineesNotStarted" v-model="iTotalExamineesNotStarted">
+																										</h1>
+																										</div>
+																									</th>
+																								</tr>
+																							</table>
+																						</td>
+																						<td style="text-align:center;vertical-align:bottom;">
+																							<table class="bodyText" style="width: 100%;" cellpadding="0" cellspacing="0">
+																								<tr>
+																									<th style="text-align:center;color:#626262;">
+																										<table class="bodyText" style="width: 100%;" cellpadding="0" cellspacing="0">
+																											<tr>
+																												<td style="text-align:right;vertical-align:top;padding-bottom:5px;">
+																													<div id="d3LegendBottom3"></div>
+																												</td>
+																												<td style="text-align:left;vertical-align:bottom;padding-left:10px;">
+																													Examinees<br/>Started
+																												</td>
+																											</tr>
+																										</table>
+																									</th>
+																								</tr>
+																								<tr>
+																									<th style="text-align:center;"><h1>
+																									<div id="dvTotalExamineesStarted">
+																										<input type="text" name="iTotalExamineesStarted" v-model="iTotalExamineesStarted">
+																									</div></h1></th>
+																								</tr>
+																							</table>
+																						</td>
+																					</tr>
+																				</table>
+																			</td>
+																			<td style="text-align:right;vertical-align:top;width:500px;height:220px;">
+																				<div id="d3ArcCanvas"></div>
+																			</td>
+																		</tr>
+																	</table>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</table>
+										</td>
+										<td style="text-align:right;width:2%;">
+										</td>
+										<td style="vertical-align:top;text-align:right;width:15%;border:solid 1px #DFDFDF;height:200px;">
+											<table class="bodyText" style="width: 99%;" cellpadding="5" cellspacing="0">
+												<tr>
+													<th style="vertical-align:top;text-align:center;padding-top:20px;">TEST CENTER</th>
+												</tr>
+												<tr>
+													<td style="vertical-align:top;text-align:left;padding-left:20px;;">
+														<select id="testcenter" name="testcenter" style="width:95%;">
+															<option value="0">Select Test Center</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<th style="vertical-align:top;text-align:center;padding-top:20px;">DATE RANGE</th>
+												</tr>
+												<tr>
+													<td style="vertical-align:top;text-align:left;padding-left:20px;">
+														<input type="text" class="datePicker" id="date1" name="date1" value="" style="width:180px;"/>
+														<input type="button" class="clickable btnRemove" id="btnRemoveDate1" name="btnRemoveDate1" value="X" />
+													</td>
+												</tr>
+												<tr>
+													<td style="vertical-align:top;text-align:left;padding-left:20px;">
+														<input type="text" class="datePicker" id="date2" name="date2" value="" style="width:180px;"/>
+														<input type="button" class="clickable btnRemove" id="btnRemoveDate2" name="btnRemoveDate2" value="X" />
+													</td>
+												</tr>
+												<tr>
+													<td style="vertical-align:top;text-align:left;padding-bottom:20px;padding-top:20px;padding-left:20px;">
+														<input type="button" class="clickable" id="btnFilter2" name="btnFilter2" value="Filter" style="width:236px;"/>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+								<br/>
+							</div> <!-- end #listing -->
+						</div> <!-- end .pri -->
+					</div> <!-- end #wrapcontent -->
+				</td>
+			</tr>
+			<tr>
+				<td>
+				</td>
+			</tr>
+		</table>
+	</div> <!-- end #wrapdoc -->
+</body>
+</html>

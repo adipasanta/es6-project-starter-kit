@@ -31,6 +31,7 @@
     "babel-core": "^6.24.1",
     "babel-plugin-transform-es2015-modules-umd": "^6.24.1",
     "babel-preset-es2015": "^6.24.1",
+    "bootstrap-sass": "^3.3.7",
     "chai": "^4.0.0",
     "chokidar": "^1.7.0",
     "d3": "^4.11.0",
@@ -44,6 +45,9 @@
     "mocha": "^3.4.2",
     "phantomjs-prebuilt": "^2.1.14",
     "rollup": "^0.41.6",
+    "rollup-plugin-commonjs": "^8.2.6",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-sass": "^0.5.3",
     "serve": "^5.2.2",
     "sinon": "^2.3.2",
     "sinon-chai": "^2.10.0",
@@ -56,6 +60,7 @@
   },
   "homepage": "https://github.com/GianlucaGuarini/es6-project-starter-kit",
   "dependencies": {
-    "file-saver": "^1.3.3"
+    "file-saver": "^1.3.3",
+    "vue": "^2.5.3"
   }
 }
