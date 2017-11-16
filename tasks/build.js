@@ -3,8 +3,12 @@ var utils = require('./_utils'),
   mkdirp = require('mkdirp'),
   fs = require('fs'),
   noderesolve = require('rollup-plugin-node-resolve'),
+  replace = require('rollup-plugin-replace'),
   commonjs = require('rollup-plugin-commonjs'),
+  globals = require('rollup-plugin-node-globals'),
   babel = require('babel-core')
+
+const alias = require('rollup-plugin-alias')
 
 module.exports = function(options) {
 
@@ -33,6 +37,17 @@ module.exports = function(options) {
           // be transpiled by a previous plugin!)
           extensions: [ '.js', '.coffee' ] // defaults to [ '.js' ]
         }),
+        replace({
+            'process.env.NODE_ENV': JSON.stringify('development'),
+            'process.env.VUE_ENV': JSON.stringify('browser')
+        }),
+        alias({
+            'vue': 'node_modules/vue/dist/vue.esm.js'
+        }),
+        globals({
+          'vue': 'Vue',
+          'vue-router': 'VueRouter'
+        })
       ]
     }).then( function ( bundle ) {
 
